@@ -56,13 +56,13 @@ export function ImageUpload() {
         src= {source ? source : altImage}
         alt= 'Selected Image'
         style={source ? {} : {opacity: 0.15}}
-        className="object-contain h-[600px] w-full max-w-[40vw]" // Adjust dimensions as per your requirements
+        className="object-contain mb-[5rem] w-full max-w-[35vw]"
       />
     {imageData && (
       <img 
         src={imageData} 
         alt="Uploaded Image" 
-        className="object-contain h-[600px] w-full max-w-[40vw]" // Adjust dimensions as per your requirements
+        className="object-contain mb-[5rem] w-full max-w-[35vw]"
       />
     )}
   </div>
