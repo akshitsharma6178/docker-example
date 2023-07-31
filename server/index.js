@@ -16,7 +16,7 @@ var corsOptions = {
 app.use(cors(corsOptions));
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send('Object-Detection API')
 })
 
 app.post('/upload', upload.single('file'), (req, res) => {

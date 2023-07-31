@@ -1,4 +1,3 @@
-import './App.css'
 import { Header } from './components/header/header'
 import { ImageUpload } from './components/image_upload/imageUpload'
 
