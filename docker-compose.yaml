@@ -12,3 +12,9 @@ services:
      - '5173:5173'
     stdin_open: true
     tty: true
+  nginx:
+    build: ./nginx
+    container_name: nginx_c
+    ports:
+     - '80:80'
+     - '443:443'
