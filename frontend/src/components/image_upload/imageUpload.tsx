@@ -10,6 +10,9 @@ export function ImageUpload() {
     const [isLoading, setIsLoading] = useState<boolean>(false)
   
     const onImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setImage(null)
+      setSource(null)
+      setImageData(null)
       if (e.target.files && e.target.files[0]) {
         const img = e.target.files[0]
         setImage(img);
