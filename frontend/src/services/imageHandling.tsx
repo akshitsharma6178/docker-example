@@ -11,7 +11,6 @@ async function uploadImage(formData: FormData){
         } else {
           const arrayBuffer = await response.arrayBuffer();
           return arrayBuffer
-          alert("Image uploaded successfully");
         }
       } catch (error) {
         console.error('Error:', error);
