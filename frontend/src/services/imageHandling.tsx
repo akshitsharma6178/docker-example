@@ -1,6 +1,10 @@
 const url = "https://localhost:3000"
 
-async function uploadImage(formData: FormData){
+// uploadImage: 
+//args: formdata: FormData required
+//returns: arrayBuffer
+
+async function uploadImage(formData: FormData) { // uploadImage api that returns ArrayBuffer
     try {
         const response = await fetch(`${url}/upload`, {
           method: 'POST',

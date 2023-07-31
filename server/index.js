@@ -9,39 +9,42 @@ const port = 3000
 const upload = multer();
 
 var corsOptions = {
-  origin: '*',
-  optionsSuccessStatus: 200
+  origin: '*'
 }
 
 app.use(cors(corsOptions));
+
+//default api
 
 app.get('/', (req, res) => {
   res.send('Object-Detection API')
 })
 
+//upload
+//image handling and processing
+//expects fieldName 'file' of the file that is to be uploaded
+
 app.post('/upload', upload.single('file'), (req, res) => {
   let imageBuffer = req.file.buffer;
-  const python = spawn('python', ['./scripts/main.py']);
+  const python = spawn('python', ['./scripts/main.py']); //spawns a python script
   
   python.stdin.write(imageBuffer);
   python.stdin.end();
 
   let dataChunks = []
 
-  python.stdout.on('data', (data) => {
+  python.stdout.on('data', (data) => { //python script output
     dataChunks.push(data)
   })
 
-  python.stderr.on('data', (data) => {
+  python.stderr.on('data', (data) => { //python script error
     console.error(`stderr: ${data}`);
   });
 
-  python.on('close', (code) => {
+  python.on('close', (code) => { //python script exit
       console.log(`child process exited with code ${code}`);
-      // Once the script has finished running, send the new image to the client
       if(code !== 0) {
         if(!res.headersSent) {
-          responseSent = true;
           res.status(500).send({error: 'Internal Server Error: Script Failed to execute'})
           console.error('index.js: main.py Script faliure')
         }
@@ -62,12 +65,16 @@ app.post('/upload', upload.single('file'), (req, res) => {
   });
 });
 
+// https credentials
+
 const privateKey = fs.readFileSync('./privatekey.pem', 'utf8');
 const certificate = fs.readFileSync('./certificate.pem', 'utf8');
 
 const credentials = {key: privateKey, cert: certificate};
 
 const httpsServer = https.createServer(credentials, app);
+
+// end https credentials
 
 httpsServer.listen(port, () => {
   console.log(`App listening on port ${port}`)

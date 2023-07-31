@@ -3,11 +3,17 @@ import { uploadImage } from "../../services/imageHandling";
 import { Spinner } from "../spinner/spinner";
 import altImage from '../../assets/alt.jpg';
 
+//ImageUpload()
+//return the imageUpload functionality
+
 export function ImageUpload() {
-    const [image, setImage] = useState<File | null>();
-    const [source, setSource] = useState<string | null>(null);
-    const [imageData, setImageData] = useState<string | null>('')
-    const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [image, setImage] = useState<File | null>(); // selected imagefile
+    const [source, setSource] = useState<string | null>(null); // selected source path
+    const [imageData, setImageData] = useState<string | null>('') // image received from api
+    const [isLoading, setIsLoading] = useState<boolean>(false) // toggle for spinner
+
+    //onImageChange
+    //handles Image selection and associated variables
   
     const onImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       setImage(null)
@@ -20,6 +26,9 @@ export function ImageUpload() {
         setSource(url);
       }
     };
+
+    //onImageUpload
+    //handle image Upload and decode
   
     const onImageUpload = async () => {
       const formData = new FormData();
@@ -41,6 +50,9 @@ export function ImageUpload() {
             setIsLoading(false);
         })
     };
+
+    //onReset
+    //resets the associates variables and input field
 
     const onReset = () => {
       setImage(null)

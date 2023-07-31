@@ -1,3 +1,6 @@
+//Spinner
+//returns a loading spinner
+
 export function Spinner(){
     return(
     <div role="status" className="w-full h-full absolute left-1/2 top-1/2 flex justify-center items-center bg-black bg-opacity-75 transform -translate-x-1/2 -translate-y-1/2">
